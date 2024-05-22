@@ -1,20 +1,14 @@
-<!doctype html>
-<html>
-<head>
-    <title>ArtValley</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ asset('storage/img/icons/mandala.png') }}">
-    @vite(['resources/css/app.css','resources/js/app.js'])
+@include('shared.html')
 
-</head>
+@include('shared.head', ['title' => 'ArtValley'])
+
 <body  class="bg-gray-50">
     <!-- navbar -->
     @include('shared.navbar')
 
     <!-- carousel -->
-    <section id="carousel">
-        <div id="indicators-carousel" class="relative w-full" data-carousel="static">
+    <section id="carousel" class="mb-10">
+        <div id="indicators-carousel" class="relative w-full" data-carousel="slide">
             <!-- Carousel wrapper -->
             <div class="relative h-56 overflow-hidden rounded-b-lg md:h-96">
                 @foreach($files as $file)
@@ -50,8 +44,45 @@
     </section>
 
     <!-- content -->
+    <section id="featured" class="mb-16">
+        <h1 class="pt-5 text-center text-5xl font-extrabold dark:text-white">Featured<small class="ms-2 font-semibold text-gray-500 dark:text-gray-400">Art Work</small></h1>
+        <div class="flex flex-col flex-wrap p-5 gap-5 justify-center md:flex-row">
+        @foreach($offers as $offer)
+            <div class="basis-1/4">
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <a href="{{ route('offer.show', ['id' => $offer->id]) }}">
+                    <img class="rounded-t-lg" src="{{ Storage::url($offer->artwork->{"image-path"}) }}" alt="Offer Image" />
+                </a>
+                <div class="flex flex-col place-content-between p-5 h-56">
+                    <a href="{{ route('offer.show', ['id' => $offer->id]) }}">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $offer->artwork->title }}</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        @php
+                            $description = $offer->description;
+                            if (strlen($description) > 100) {
+                                $description = substr($description, 0, 100) . '...';
+                            }
+                        @endphp
+                        {{ $description }}
+                    </p>
+                    <a href="{{ route('offer.show', ['id' => $offer->id]) }}" class="max-w-32 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Offer site
+                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            </div>
+        @endforeach
+        </div>
+    </section>
 
+    <!-- about   -->
+    <section id="about">
 
+    </section>
     <!-- footer -->
     @include('shared.footer')
 </body>
