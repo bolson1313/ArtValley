@@ -12,7 +12,7 @@ class Artist extends Model
 
     protected $table = 'artists';
     protected $primaryKey = 'id';
-
+    public $timestamps = false;
 
     protected $fillable = ['name', 'surname'];
 

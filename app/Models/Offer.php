@@ -14,8 +14,9 @@ class Offer extends Model
     protected $table = 'offers';
     protected $primaryKey = 'id';
 
-    public function artwork(): HasOne {
-        return $this->hasOne(ArtWork::class);
+    public $timestamps = false;
+    public function artwork(): BelongsTo {
+        return $this->belongsTo(ArtWork::class);
     }
 
     public function transaction(): BelongsTo {
