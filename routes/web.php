@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\OfferController;
 use Illuminate\Support\Facades\Route;
@@ -11,7 +12,7 @@ Route::get('/contact', function(){
 })->name('contact');
 
 Route::get('/about', function(){
-    return view('home');
+    return view('about');
 })->name('about');
 
 Route::controller(OfferController::class)->group(function () {
@@ -20,11 +21,12 @@ Route::controller(OfferController::class)->group(function () {
 
 });
 
-Route::get('/login', function(){
-    return view('auth.login');
-})->name('login');
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/auth/login', 'login')->name('login');
+    Route::post('/auth/login', 'authenticate')->name('login.authenticate');
+    Route::get('/auth/logout', 'logout')->name('logout');
+});
 
 
-Route::get('/register', function(){
-    return view('auth.register');
-})->name('register');
+Route::get('/register', [AuthController::class, 'RegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
