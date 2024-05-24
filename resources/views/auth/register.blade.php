@@ -12,7 +12,7 @@
 
         @include('shared.session-error')
 
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-6" action="{{ route('register') }}" method="POST">
             @csrf
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             <h5 class="text-xl font-medium text-gray-900 dark:text-white">Sign up to Art Valley</h5>
