@@ -63,7 +63,7 @@
             <div class="basis-1/4">
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <a href="{{ route('offer.show', ['id' => $offer->id]) }}">
-                    <img class="rounded-t-lg" src="{{ Storage::url($offer->artwork->{"image-path"}) }}" alt="Offer Image" />
+                    <img class="rounded-t-lg" src="{{ Storage::url($offer->artwork->{"image"}) }}" alt="Offer Image" />
                 </a>
                 <div class="flex flex-col place-content-between p-5 h-56">
                     <a href="{{ route('offer.show', ['id' => $offer->id]) }}">
