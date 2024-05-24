@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('artist_id');
             $table->string('title')->nullable();
-            $table->string('image-path')->unique();
+            $table->string('image')->unique();
             $table->enum('form', ['painting','sculpture','drawing','photography'])->nullable();
             $table->enum('medium', ['pencil','ink','chalk', 'oil', 'tempera', 'watercolor', 'acrylic', 'bronze', 'marble', 'wood', 'metal', 'digital', 'film', 'mixed', 'temporary'])->nullable();
             $table->string('size');
