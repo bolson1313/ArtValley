@@ -64,7 +64,7 @@
         <div>
             <figure class="relative transition-all duration-300 rounded-lg">
                 <a href="{{ route('offer.show', ['id' => $offer->id]) }}">
-                    <img class="rounded-lg transition-all duration-300 blur-none hover:blur-sm" src="{{ Storage::url($offer->artwork->{'image-path'}) }}" alt="">
+                    <img class="rounded-lg transition-all duration-300 blur-none hover:blur-sm" src="{{ Storage::url($offer->artwork->{'image'}) }}" alt="">
                 </a>
                 <figcaption class="absolute bottom-6 px-4 text-lg text-white z-10">
                     <p>{{ $offer->artwork->title }}</p>
