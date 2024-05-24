@@ -15,7 +15,17 @@ class ArtWork extends Model
     protected $table = 'art_works';
     protected $primaryKey = 'id';
     public $timestamps = false;
-
+    public $incrementing = true;
+    protected $fillable = [
+        'artist_id',
+        'title',
+        'image',
+        'form',
+        'medium',
+        'size',
+        'certificate',
+        'signature'
+    ];
     public function artist(): BelongsTo{
         return $this->belongsTo(Artist::class);
     }

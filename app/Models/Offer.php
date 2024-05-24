@@ -13,7 +13,14 @@ class Offer extends Model
 
     protected $table = 'offers';
     protected $primaryKey = 'id';
-
+    protected $fillable = [
+        'artwork_id',
+        'user_id',
+        'description',
+        'price',
+        'status',
+        'created_at'
+    ];
     public $timestamps = false;
     public function artwork(): BelongsTo {
         return $this->belongsTo(ArtWork::class);
