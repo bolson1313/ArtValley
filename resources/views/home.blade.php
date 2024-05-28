@@ -61,11 +61,11 @@
         <div class="flex flex-col flex-wrap content-center p-5 gap-5 justify-center md:flex-row">
         @foreach($offers as $offer)
             <div class="basis-1/4">
-            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <a href="{{ route('offer.show', ['id' => $offer->id]) }}" class="flex justify-center min-h-[300px] bg-gray-200">
-                    <img class="rounded-t-lg max-h-[300px]" src="{{ Storage::url($offer->artwork->{"image"}) }}" alt="Offer Image" />
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 overflow-hidden">
+                <a href="{{ route('offer.show', ['id' => $offer->id]) }}" class="flex justify-center min-h-[300px] bg-gray-200 overflow-hidden">
+                    <img class="rounded-t-lg w-full max-h-[300px] object-cover" src="{{ Storage::url($offer->artwork->{"image"}) }}" alt="Offer Image" />
                 </a>
-                <div class="flex flex-col place-content-between p-5 h-56">
+                <div class="flex flex-col place-content-between p-5 min-h-[224px]">
                     <a href="{{ route('offer.show', ['id' => $offer->id]) }}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $offer->artwork->title }}</h5>
                     </a>
