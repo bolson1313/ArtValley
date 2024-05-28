@@ -44,7 +44,7 @@
     </section>
 
     <!-- about -->
-    <div class="flex flex-col justify-center items-center mb-16">
+    <div class="flex flex-col justify-center items-center mx-5 mb-16">
     <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Few words about us</h1>
     <p class="text-justify mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Welcome to ArtValley, your premier destination for buying and selling a diverse range of artwork. Our platform connects artists with art enthusiasts from all over the world, fostering a vibrant community where creativity and commerce intersect.</p>
     <a href="{{ route('about') }}" class="max-w-32 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -58,12 +58,12 @@
     <!-- content -->
     <section id="featured" class="mb-16">
         <h1 class="pt-5 text-center text-5xl font-extrabold dark:text-white">Featured<small class="ms-2 font-semibold text-gray-500 dark:text-gray-400">Art Work</small></h1>
-        <div class="flex flex-col flex-wrap p-5 gap-5 justify-center md:flex-row">
+        <div class="flex flex-col flex-wrap content-center p-5 gap-5 justify-center md:flex-row">
         @foreach($offers as $offer)
             <div class="basis-1/4">
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <a href="{{ route('offer.show', ['id' => $offer->id]) }}">
-                    <img class="rounded-t-lg" src="{{ Storage::url($offer->artwork->{"image"}) }}" alt="Offer Image" />
+                <a href="{{ route('offer.show', ['id' => $offer->id]) }}" class="flex justify-center min-h-[300px] bg-gray-200">
+                    <img class="rounded-t-lg max-h-[300px]" src="{{ Storage::url($offer->artwork->{"image"}) }}" alt="Offer Image" />
                 </a>
                 <div class="flex flex-col place-content-between p-5 h-56">
                     <a href="{{ route('offer.show', ['id' => $offer->id]) }}">

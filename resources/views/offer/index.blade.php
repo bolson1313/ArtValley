@@ -6,9 +6,7 @@
     @include('shared.navbar')
 
 
-
-
-    <div class="flex items-center justify-center py-4 md:py-8 flex-wrap">
+    <div class="flex flex-row justify-center py-4 md:py-8 flex-wrap">
         <a href="{{ url('/offers') }}" class="
     text-base font-medium px-5 py-2.5 text-center me-3 mb-3 rounded-full
     @if(!str_contains(request()->fullUrl(), 'form'))
@@ -59,21 +57,25 @@
             Photography
         </a>
     </div>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 ml-5 mr-5 mb-20">
-        @foreach($offers as $offer)
+    <div class="grow grid grid-cols-1 md:grid-cols-3 gap-4 md:ml-5 md:mr-5 mb-20 m-5 justify-items-center">
+        @forelse($offers as $offer)
         <div>
             <figure class="relative transition-all duration-300 rounded-lg">
-                <a href="{{ route('offer.show', ['id' => $offer->id]) }}">
-                    <img class="rounded-lg transition-all duration-300 blur-none hover:blur-sm" src="{{ Storage::url($offer->artwork->{'image'}) }}" alt="">
+                <a href="{{ route('offer.show', ['id' => $offer->id]) }}" class="md:min-w-full min-w-full flex justify-center rounded-lg">
+                    <img class="md:max-h-[400px] rounded-lg transition-all duration-300 blur-none hover:blur-sm" src="{{ Storage::url($offer->artwork->{'image'}) }}" alt="">
                 </a>
-                <figcaption class="absolute bottom-6 px-4 text-lg text-white z-10">
+                <figcaption class="absolute bottom-6 px-4 text-lg text-gray-600 z-10 w-full text-center">
                     <p>{{ $offer->artwork->title }}</p>
                 </figcaption>
             </figure>
         </div>
-
-        @endforeach
+        @empty
+                    <div class=" md:col-start-1 md:col-end-4 w-full h-full justify-self-center">
+                        <h1 class="md:ml-5 m-0 md:mr-5 max-w-full mt-5 md:text-4xl text-2xl font-extrabold dark:text-white text-center">No available offers in that category!</h1>
+                    </div>
+        @endforelse
     </div>
+
 
 
     @include('shared.footer')
