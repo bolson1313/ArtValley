@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -52,6 +53,7 @@ class UserController extends Controller
         if(!Auth::check()){
             abort(403);
         }
+        Gate::authorize('view', $user);
         return view('user.settings', compact('user'));
     }
 
@@ -60,6 +62,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+        Gate::authorize('view', $user);
         if($request->user()->cannot('update', $user)){
             abort(403);
         }
@@ -82,7 +85,7 @@ class UserController extends Controller
 
 
 
-        $user->update();
+        $user->save();
 
         return redirect()->route('user.settings', $user);
     }
