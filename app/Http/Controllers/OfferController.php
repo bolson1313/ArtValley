@@ -205,6 +205,7 @@ class OfferController extends Controller
                 'user_id' => Auth::id(),
                 'offer_id' => $offer->id,
                 'payment_method' => $request->input('payment_method'),
+                'price' => $offer->price,
                 'type' => 'buy',
                 'completed' => now()->toDateTimeString(),
             ]
@@ -215,6 +216,7 @@ class OfferController extends Controller
                 'user_id' => $offer->user_id,
                 'offer_id' => $offer->id,
                 'payment_method' => $request->input('payment_method'),
+                'price' => $offer->price,
                 'type' => 'sell',
                 'completed' => now()->toDateTimeString(),
             ]
