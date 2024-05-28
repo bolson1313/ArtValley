@@ -68,7 +68,7 @@
                 {{ $offer->created_at }}
             </td>
             <td class="px-6 py-4">
-                <a href="{{ route('offer.edit',['offer_id'=>$offer->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                <a href="{{ route('offer.edit',['offer'=>$offer]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
             </td>
             <form method="POST" action="{{ route('offer.destroy', $offer) }}">
                 @csrf
