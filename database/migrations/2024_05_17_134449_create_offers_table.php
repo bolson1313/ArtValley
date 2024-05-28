@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('artwork_id');
             $table->unsignedBigInteger('user_id');
             $table->longtext('description')->nullable();
-            $table->double('price');
+            $table->integer('price');
             $table->enum('status', ['active', 'inactive', 'closed'])->default('active');
             $table->timestamp('created_at');
 
