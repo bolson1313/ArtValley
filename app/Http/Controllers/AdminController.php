@@ -383,4 +383,12 @@ class AdminController extends Controller
         $transaction->delete();
         return redirect()->route('admin.transactions');
     }
+
+    public function offerStats() {
+        $offers= Offer::all()->groupBy('status')->map(function ($offers) {
+            return $offers->count();
+        });
+        //dd($offers);
+        return view('admin.stats', compact('offers'));
+    }
 }

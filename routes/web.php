@@ -98,6 +98,9 @@ Route::middleware(AdminMiddleware::class)->group(function () {
         Route::post('/admin/panel/transactions/updated', 'transaction_update')->name('admin.transactionUpdate');
         Route::delete('/admin/panel/transactions/delete/{transaction}', 'transaction_destroy')->name('admin.transactionDelete');
 
+
+        //chart with active and inactive offers
+        Route::get('/admin/panel/stats', 'offerStats')->name('admin.stats');
     });
 });
 
