@@ -25,7 +25,7 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|string|max:50|min:3',
             'surname' => 'required|string|max:50|min:3',
             'nickname' => 'required|string|max:50|min:3|unique:users,nickname,'.$this->user()->id.',id',
-            'file_input' => 'required|mimes:jpeg,png,jpg|max:5048',
+            'file_input' => 'mimes:jpeg,png,jpg|max:5048',
             'email' => 'required|string|email|max:70|unique:users,email,'.$this->user()->id.',id',
             'password' => 'required|string|min:8|confirmed',
         ];
