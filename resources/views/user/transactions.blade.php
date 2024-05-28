@@ -24,6 +24,9 @@
                 Sell/Buy
             </th>
             <th scope="col" class="px-6 py-3">
+                Price
+            </th>
+            <th scope="col" class="px-6 py-3">
                 Completed
             </th>
         </tr>
@@ -42,6 +45,9 @@
                 </td>
                 <td class="px-6 py-4">
                     {{ $transaction->type }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $transaction->price }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $transaction->completed }}

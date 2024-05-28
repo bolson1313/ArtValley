@@ -6,11 +6,12 @@
 @include('shared.navbar')
 
 <!-- art -->
-<div class="flex flex-col m-10 max-w-full flex-wrap md:m-24 md:flex-row">
-    <div class="basis-1/2 flex self-center justify-center">
-        <img class="h-auto w-full p-5 max-h-[595px] max-w-[640px]" src="{{ Storage::url($offer->artwork->{'image'}) }}" alt="{{ $offer->artwork->title }}">
+<div class="flex flex-row mx-10 mb-10 max-w-full flex-wrap md:mx-24 md:mb-24 md:flex-col">
+    <div class=" flex self-center justify-center h-full">
+        <img class="h-auto w-full p-5 " src="{{ Storage::url($offer->artwork->{'image'}) }}" alt="{{ $offer->artwork->title }}">
     </div>
-    <div class="basis-1/2 flex flex-col md:flex-row flex-wrap w-full">
+    <div class="flex flex-col md:flex-row flex-wrap h-full w-full">
+
         <h1 class="md:ml-5 m-0 md:mr-5 max-w-full mt-5 md:text-5xl text-3xl font-extrabold dark:text-white">{{ $offer->artwork->title }}<br><small class="ms-2 font-semibold text-gray-500 dark:text-gray-400">{{ $offer->artwork->artist->name }} {{ $offer->artwork->artist->surname }}</small></h1>
 
 

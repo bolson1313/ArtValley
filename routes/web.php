@@ -107,3 +107,8 @@ Route::middleware(AdminMiddleware::class)->group(function () {
 
 Route::get('/register', [AuthController::class, 'RegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+
+
+Route::fallback(function (){
+    return view('error_page');
+});

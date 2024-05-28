@@ -6,6 +6,7 @@
     <!-- navbar -->
     @include('shared.navbar')
 
+    @include('shared.session-error')
     <!-- carousel -->
     <section id="carousel" class="mb-10">
         <div id="indicators-carousel" class="relative w-full" data-carousel="slide">
