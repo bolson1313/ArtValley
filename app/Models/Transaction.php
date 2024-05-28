@@ -13,9 +13,18 @@ class Transaction extends Model
 
     protected $primaryKey = 'id';
     protected $table = 'transactions';
+    public $timestamps = false;
+    protected $fillable = [
+        'user_id',
+        'offer_id',
+        'payment_method',
+        'type',
+        'completed',
+        'price'
+    ];
 
-    public function offer(): HasOne {
-        return $this->hasOne(Offer::class);
+    public function offer(): BelongsTo {
+        return $this->BelongsTo(Offer::class);
     }
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
