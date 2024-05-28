@@ -64,7 +64,7 @@
                 <a href="{{ route('offer.show', ['id' => $offer->id]) }}" class="md:min-w-full min-w-full flex justify-center rounded-lg">
                     <img class="md:max-h-[400px] rounded-lg transition-all duration-300 blur-none hover:blur-sm" src="{{ Storage::url($offer->artwork->{'image'}) }}" alt="">
                 </a>
-                <figcaption class="absolute bottom-6 px-4 text-lg text-gray-600 z-10 w-full text-center">
+                <figcaption class="bg-gray-200 absolute bottom-6 px-4 text-lg text-black z-10 w-full text-center rounded-xl">
                     <p>{{ $offer->artwork->title }}</p>
                 </figcaption>
             </figure>
