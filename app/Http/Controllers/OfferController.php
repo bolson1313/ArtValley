@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTransactionRequest;
 use App\Models\Artist;
 use App\Models\ArtWork;
 use App\Models\Offer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOfferRequest;
 use App\Http\Requests\UpdateOfferRequest;
+use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class OfferController extends Controller
 {
@@ -132,13 +136,15 @@ class OfferController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Offer $offer)
     {
-        $offer = Offer::findOrFail($id);
-        $artwork = $offer->artwork;
-        $artist = $offer->artwork->artist;
+        Gate::authorize('view', $offer);
+
+        $offer_find = Offer::findOrFail($offer->id);
+        $artwork = $offer_find->artwork;
+        $artist = $offer_find->artwork->artist;
         return view('offer.edit', [
-            'offer' => $offer,
+            'offer' => $offer_find,
             'artwork' => $artwork,
             'artist' => $artist
         ]);
@@ -160,6 +166,7 @@ class OfferController extends Controller
      */
     public function destroy(Offer $offer)
     {
+        Gate::authorize('delete', $offer);
         $offer->delete();
         return redirect()->route('offer.user', Auth::id());
     }
@@ -167,10 +174,56 @@ class OfferController extends Controller
         return view('offer.create');
     }
 
-    public function user_offers($user_id) {
+    public function user_offers(User $user) {
+        Gate::authorize('view', [$user, Offer::class]);
+
         // Pobierz oferty użytkownika na podstawie user_id
-        $offers = Offer::with(['artwork.artist'])->where('user_id', $user_id)->get();
+        $offers = Offer::with(['artwork.artist'])->where('user_id', $user->id)->get();
+
+        foreach ($offers as $offer) {
+            Gate::authorize('view', [$user, $offer]);
+        }
+
         // Przekaż oferty do widoku
         return view('offer.user', compact('offers'));
+    }
+
+    public function buy_menu(Offer $offer) {
+        if(!Auth::check() || Auth::id() == $offer->user_id || $offer->status != ('inactive' || 'closed')){
+
+            abort(401);
+        }
+        return view('offer.buy', compact('offer'));
+    }
+
+    public function buy_offer(Request $request, Offer $offer) {
+        if(!Auth::check() || Auth::id() == $offer->user_id || $offer->status != ('inactive' || 'closed')){
+            abort(403);
+        }
+        Transaction::create(
+            [
+                'user_id' => Auth::id(),
+                'offer_id' => $offer->id,
+                'payment_method' => $request->input('payment_method'),
+                'type' => 'buy',
+                'completed' => now()->toDateTimeString(),
+            ]
+        );
+
+        Transaction::create(
+            [
+                'user_id' => $offer->user_id,
+                'offer_id' => $offer->id,
+                'payment_method' => $request->input('payment_method'),
+                'type' => 'sell',
+                'completed' => now()->toDateTimeString(),
+            ]
+        );
+
+        $offer -> status = 'closed';
+
+        $offer -> save();
+        // Przekaż oferty do widoku
+       return redirect()->route('user.transactions', Auth::user());
     }
 }
