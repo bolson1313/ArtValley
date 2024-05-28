@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('offer_id');
             $table->enum('payment_method', ['credit_card', 'bank_transfer', 'cash']);
             $table->integer('price');
+            $table->enum('type', ['sell', 'buy']);
             $table->timestamp('completed');
 
             $table->foreign('user_id')
