@@ -7,8 +7,8 @@
 
 <!-- art -->
 <div class="flex flex-row mx-10 mb-10 max-w-full flex-wrap md:mx-24 md:mb-24 md:flex-col">
-    <div class=" flex self-center justify-center h-full">
-        <img class="h-auto w-full p-5 " src="{{ Storage::url($offer->artwork->{'image'}) }}" alt="{{ $offer->artwork->title }}">
+    <div class="mt-5 flex self-center justify-center h-full">
+        <img class="max-h-[800px] rounded-md w-full" src="{{ Storage::url($offer->artwork->{'image'}) }}" alt="{{ $offer->artwork->title }}">
     </div>
     <div class="flex flex-col md:flex-row flex-wrap h-full w-full">
 

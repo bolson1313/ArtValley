@@ -14,6 +14,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use function PHPUnit\Framework\isEmpty;
 
 class OfferController extends Controller
 {
@@ -128,9 +129,9 @@ class OfferController extends Controller
      */
     public function show($id)
     {
-        return view('offer.show', [
-            'offer' => Offer::findOrFail($id)
-        ]);
+        $offer = Offer::find($id);
+
+        return view('offer.show', compact('offer'));
     }
 
     /**
@@ -140,7 +141,7 @@ class OfferController extends Controller
     {
         Gate::authorize('view', $offer);
 
-        $offer_find = Offer::findOrFail($offer->id);
+        $offer_find = Offer::find($offer->id);
         $artwork = $offer_find->artwork;
         $artist = $offer_find->artwork->artist;
         return view('offer.edit', [
