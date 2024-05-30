@@ -110,5 +110,5 @@ Route::post('/register', [AuthController::class, 'register']);
 
 
 Route::fallback(function (){
-    return view('error_page');
+    return view('errors.404');
 });
