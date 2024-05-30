@@ -1,8 +1,8 @@
 @include('shared.html')
 
-@include('shared.head', ['title' => 'Error'])
+@include('shared.head', ['title' => 'Error 404'])
 
-<body  class="bg-gray-50 h-dvh flex flex-col justify-between">
+<body class="bg-gray-50 h-dvh flex flex-col justify-between">
 <!-- navbar -->
 @include('shared.navbar')
 
