@@ -66,10 +66,15 @@ class UserController extends Controller
         if($request->user()->cannot('update', $user)){
             abort(403);
         }
-        Storage::delete('public/img/avatars/'.$user->avatar);
 
-        $imageName =$request->input('name'). '-' . $request->input('nickname') . '-' . time() . '.' .$request-> file_input -> extension();
-        $request-> file_input -> move(public_path('storage/img/avatars/'), $imageName);
+        if($request->hasFile('file_input')){
+            Storage::delete('public/img/avatars/'.$user->avatar);
+
+            $imageName =$request->input('name'). '-' . $request->input('nickname') . '-' . time() . '.' .$request-> file_input -> extension();
+            $request-> file_input -> move(public_path('storage/img/avatars/'), $imageName);
+            $user->avatar = $imageName;
+        }
+
 
 
 
@@ -80,7 +85,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->remember_token = csrf_token();
 
-        $user->avatar = $imageName;
+
         $user->updated_at = now();
 
 

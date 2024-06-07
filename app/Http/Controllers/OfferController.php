@@ -130,7 +130,9 @@ class OfferController extends Controller
     public function show($id)
     {
         $offer = Offer::find($id);
-
+        if(!$offer){
+            return response()->view('errors.404', [], 404);
+        }
         return view('offer.show', compact('offer'));
     }
 

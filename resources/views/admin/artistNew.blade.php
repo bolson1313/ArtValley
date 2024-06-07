@@ -20,12 +20,13 @@
             <h5 class="text-xl font-medium text-center text-gray-900 dark:text-white">Create new Artist</h5>
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="John" value="{{ old('name') }}" required autocomplete="name" autofocus/>
+                <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="John" value="{{ old('name') }}"
+                       required autocomplete="name" autofocus minlength="5"/>
 
                 <label for="surname" class="block text-sm font-medium text-gray-900 dark:text-white">Surname</label>
                 <input type="text" name="surname" id="surname"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                       placeholder="Brown" value="{{ old('surname') }}" required autocomplete="surname" autofocus/>
+                       placeholder="Brown" value="{{ old('surname') }}" autocomplete="surname" autofocus/>
 
             </div>
             <button type="submit"

@@ -55,7 +55,7 @@
             </tr>
         @empty
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th colspan="5" class="px-6 py-4 font-bold text-xl text-center text-gray-900 whitespace-nowrap dark:text-white">
+                <th colspan="6" class="px-6 py-4 font-bold text-xl text-center text-gray-900 whitespace-nowrap dark:text-white">
                     You have no finished transactions!
                 </th>
             </tr>

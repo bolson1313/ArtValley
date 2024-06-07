@@ -85,17 +85,17 @@ class AdminController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
-        Storage::delete('public/img/avatars/'.$user->avatar);
-
-
         if ($request->hasFile('file_input')) {
+            Storage::delete('public/img/avatars/'.$user->avatar);
             $file = $request->file('file_input');
             $imageName = $request->input('name') . '-' . $request->input('nickname') . '-' . time() . '.' . $file->extension();
             $file->move(public_path('storage/img/avatars/'), $imageName);
-        } else {
-            $imageName = $request->input('name') . '-' . $request->input('nickname') . '-' . time() . '.png';
-            Storage::copy('public/blank-profile.png', 'public/img/avatars/' . $imageName);
+            $user->avatar = $imageName;
         }
+//        else {
+//            $imageName = $request->input('name') . '-' . $request->input('nickname') . '-' . time() . '.png';
+//            Storage::copy('public/blank-profile.png', 'public/img/avatars/' . $imageName);
+//        }
 
 
 
@@ -104,8 +104,6 @@ class AdminController extends Controller
         $user->nickname = $request->nickname;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-
-        $user->avatar = $imageName;
         $user->updated_at = now();
 
 
